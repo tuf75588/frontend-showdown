@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "checkJs": true,
+    "allowJs": true,
+    "watch": true,
+    "outDir": "output"
+  }
+}
