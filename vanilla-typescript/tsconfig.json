@@ -7,6 +7,9 @@
     "checkJs": true,
     "allowJs": true,
     "watch": true,
-    "outDir": "output"
+    "outDir": "output",
+    "module": "ES2015",
+    "lib": ["ES2015", "DOM", "DOM.Iterable", "ESNext"],
+    "moduleResolution": "classic"
   }
 }

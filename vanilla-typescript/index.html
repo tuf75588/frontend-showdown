@@ -11,12 +11,21 @@
     <title>Vanilla Image Search</title>
   </head>
   <body>
-    <h1 class="header">Vanilla image search</h1>
+    <h1>Image Search</h1>
     <form>
       <label for="searchTerm">Search Term</label>
-      <input type="text" name="searchTerm" id="searchTerm" />
-      <button type="submit">Submit</button>
+      <input
+        class="u-full-width"
+        type="text"
+        id="searchTerm"
+        name="searchTerm"
+      />
+      <button type="submit">Search</button>
     </form>
-    <script src="output/index.js"></script>
+    <img id="loadingImage" src="https://i.imgur.com/LVHmLnb.gif" />
+    <section class="images">
+      <!-- images loaded dynamically here -->
+    </section>
+    <script src="output/index.js" type="module"></script>
   </body>
 </html>
