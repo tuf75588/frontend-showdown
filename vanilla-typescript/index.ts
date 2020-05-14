@@ -10,11 +10,14 @@ const loadingSpinner: HTMLImageElement = document.querySelector(
 import { getImages } from './utils/API.js';
 
 async function handleSubmit(e: Event) {
+  // clear prior results on new search
+  imgSection.innerHTML = '';
   e.preventDefault();
   const formData: FormData = new FormData(form);
   const searchTerm = formData.get('searchTerm');
   loadingSpinner.src = 'utils/loading.gif';
   getImages(searchTerm).then(paintImagesToDOM);
+  form.reset();
 }
 
 // function to map over images and toggle loading spinner off
@@ -26,12 +29,10 @@ function paintImagesToDOM(
     source: string;
   }>
 ) {
-  items.forEach(({ title }) => {
-    // clear prior results on new search
-    imgSection.innerHTML = '';
-    const p = document.createElement('p');
-    p.textContent = title;
-    imgSection.appendChild(p);
+  items.forEach(({ image }) => {
+    const img = document.createElement('img');
+    img.src = image;
+    imgSection.appendChild(img);
     // remove loading indicator
     loadingSpinner.removeAttribute('src');
   });

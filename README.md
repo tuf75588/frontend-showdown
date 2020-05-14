@@ -54,3 +54,7 @@ img {
   }
 }
 ```
+
+---
+
+The API will be using for obtaining image queries is: [nature-images-api.now.sh](https://nature-image-api.now.sh)

@@ -43,11 +43,14 @@ function handleSubmit(e) {
     return __awaiter(this, void 0, void 0, function () {
         var formData, searchTerm;
         return __generator(this, function (_a) {
+            // clear prior results on new search
+            imgSection.innerHTML = '';
             e.preventDefault();
             formData = new FormData(form);
             searchTerm = formData.get('searchTerm');
             loadingSpinner.src = 'utils/loading.gif';
             getImages(searchTerm).then(paintImagesToDOM);
+            form.reset();
             return [2 /*return*/];
         });
     });
@@ -55,12 +58,10 @@ function handleSubmit(e) {
 // function to map over images and toggle loading spinner off
 function paintImagesToDOM(items) {
     items.forEach(function (_a) {
-        var title = _a.title;
-        // clear prior results on new search
-        imgSection.innerHTML = '';
-        var p = document.createElement('p');
-        p.textContent = title;
-        imgSection.appendChild(p);
+        var image = _a.image;
+        var img = document.createElement('img');
+        img.src = image;
+        imgSection.appendChild(img);
         // remove loading indicator
         loadingSpinner.removeAttribute('src');
     });
