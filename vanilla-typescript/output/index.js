@@ -39,9 +39,6 @@ var input = document.querySelector('input[name="searchTerm"]');
 var imgSection = document.querySelector('.images');
 var loadingSpinner = document.querySelector('#loadingImage');
 import { getImages } from './utils/API.js';
-document.addEventListener('DOMContentLoaded', function () {
-    loadingSpinner.style.visibility = 'hidden';
-});
 function handleSubmit(e) {
     return __awaiter(this, void 0, void 0, function () {
         var formData, searchTerm;
@@ -49,6 +46,7 @@ function handleSubmit(e) {
             e.preventDefault();
             formData = new FormData(form);
             searchTerm = formData.get('searchTerm');
+            loadingSpinner.src = 'utils/loading.gif';
             getImages(searchTerm).then(paintImagesToDOM);
             return [2 /*return*/];
         });
@@ -58,10 +56,13 @@ function handleSubmit(e) {
 function paintImagesToDOM(items) {
     items.forEach(function (_a) {
         var title = _a.title;
+        // clear prior results on new search
+        imgSection.innerHTML = '';
         var p = document.createElement('p');
         p.textContent = title;
         imgSection.appendChild(p);
-        document.removeChild(loadingSpinner);
+        // remove loading indicator
+        loadingSpinner.removeAttribute('src');
     });
 }
 form.addEventListener('submit', handleSubmit);
