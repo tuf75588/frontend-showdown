@@ -18,29 +18,6 @@ const initialState: State = {
 
 function appReducer(state: any, action: any) {
   const { type } = action;
-  if (type === 'click') {
-    return {
-      ...state,
-      status: 'you clicked!',
-    };
-  } else if (type === 'change') {
-    return {
-      ...state,
-      searchTerm: action.searchTerm,
-    };
-  } else if (type === 'submit') {
-    return {
-      ...state,
-      status: 'loading',
-      searchTerm: action.searchTerm,
-    };
-  } else if (type === 'resolved') {
-    console.log('resolved!');
-    return {
-      ...state,
-      status: 'idle',
-    };
-  }
 }
 
 const App: React.FC = () => {
@@ -49,12 +26,10 @@ const App: React.FC = () => {
     if (state.searchTerm) {
       fetchImages(state.searchTerm).then((res) => {
         // dispatch our new state
+        dispatch({ type: 'success', payload: res });
       });
     }
-    return function cleanup() {
-      dispatch({ type: 'resolved' });
-    };
-  }, [state.status]);
+  }, []);
   return (
     <React.Fragment>
       <h1>Image Search</h1>
