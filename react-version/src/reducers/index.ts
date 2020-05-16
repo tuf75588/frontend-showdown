@@ -1,9 +1,3 @@
-export const initalState = {
-  error: null,
-  response: null,
-  status: null,
-};
-
 function appReducer(state: any, action: any) {
   switch (action.type) {
     case 'FETCHING':
@@ -11,8 +5,25 @@ function appReducer(state: any, action: any) {
         ...state,
         status: 'LOADING',
       };
+    case 'CHANGE':
+      return {
+        ...state,
+        searchValue: action.searchTerm,
+      };
     case 'SUCCESS':
-      return { ...state, status: 'SUCCESS', response: action.payload };
+      return {
+        ...state,
+        status: 'SUCCESS',
+        data: action.payload,
+        searchValue: '',
+      };
+    case 'RESET':
+      return {
+        ...state,
+        error: null,
+        data: [],
+        status: null,
+      };
     case 'ERROR':
       return { ...state, status: 'ERROR', error: action.message };
     default:
